@@ -1,0 +1,94 @@
+package Practical;
+
+import java.util.Scanner;
+class MyException extends Exception 
+{
+	public MyException(String s)
+	{
+		super(s);
+		
+	}
+}
+class customer
+{
+	String name, type;
+	int accnum;
+	float bal,amt;
+	Scanner s1 = new Scanner(System.in);
+	void details()
+	{
+		System.out.println("customer name"+name);
+		System.out.println("account type"+type);
+		System.out.println("account number"+accnum);
+		System.out.println("balance"+bal);
+	}
+	void open() {
+		System.out.println("customer name"+name);
+		name=s1.nextLine();
+		System.out.println("account type"+type);
+		type=s1.nextLine();
+		System.out.println("account number"+accnum);
+		accnum=s1.nextInt();
+		System.out.println("balance"+bal);
+		bal=s1.nextFloat();
+	}
+	void deposit()
+	{
+		details();
+		
+		bal+=amt;
+		System.out.println("amount deposited "+bal);	
+	}
+	void withdrawal()
+	{
+		details();
+		
+		bal-=amt;
+		System.out.println("amount withdrawed "+bal);
+		
+		
+	}
+	
+}
+public class Bankdeposit {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int amtd;
+
+		    customer c=new customer();
+		    while(true) {
+		    System.out.println("1.open account\n2.Display account details\n3.withdraw\n4.deposit\nEnter your choice");
+		    int choice=sc.nextInt();
+		   
+		    switch(choice) {
+		    case 1:
+		    c.open();
+		        break;
+		    case 2:
+		    c.details();
+		        break;
+		    case 3:
+		        System.out.println("Enter amount");
+		         amtd=sc.nextInt();
+		        try {
+		        if(amtd>c.bal)
+		              throw new MyException("insufficent balance");
+		           else {
+		          c.amt=amtd;
+		          c.withdrawal();
+		                }
+		             }
+		          catch(MyException es){
+		         System.out.println(es);
+		          }
+		        break;
+		    case 4:
+		    c.deposit();
+		         
+		          }
+		   
+		    }
+		}
+
+		}
+	
